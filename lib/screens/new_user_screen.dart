@@ -39,6 +39,7 @@ class _NewUserScreenState extends State<NewUserScreen> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: AssetImage('images/new_user_background_image.png'),
