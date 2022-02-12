@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:to_do_list_app_flutter/screens/add_task_screen.dart';
 import 'package:to_do_list_app_flutter/models/task_data.dart';
 import 'package:to_do_list_app_flutter/screens/help_screen.dart';
+import 'package:to_do_list_app_flutter/values.dart';
 import 'package:to_do_list_app_flutter/widgets/no_task_widget.dart';
 import 'package:to_do_list_app_flutter/widgets/task_list.dart';
 import 'package:to_do_list_app_flutter/constants.dart';
@@ -23,7 +24,7 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kStyleColorWhite,
       floatingActionButton: FloatingActionButton(
         backgroundColor: kPrimaryButtonColor,
         onPressed: () {
@@ -43,7 +44,7 @@ class _TaskScreenState extends State<TaskScreen> {
         },
         child: const Icon(
           Icons.add,
-          size: 50,
+          size: kDimensionValue_50,
         ),
       ),
       body: SafeArea(
@@ -51,9 +52,9 @@ class _TaskScreenState extends State<TaskScreen> {
           children: [
             ClipPath(
               child: Container(
-                height: 100.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
+                height: kDimensionValue_100,
+                decoration: const BoxDecoration(
+                  color: kStyleColorWhite,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,8 +66,8 @@ class _TaskScreenState extends State<TaskScreen> {
                       },
                       icon: const Icon(
                         Icons.arrow_back,
-                        size: 30.0,
-                        color: Colors.black54,
+                        size: kDimensionValue_30,
+                        color: kStyleColorBlack_54,
                       ),
                     ),
                     IconButton(
@@ -75,8 +76,8 @@ class _TaskScreenState extends State<TaskScreen> {
                       },
                       icon: const Icon(
                         Icons.help,
-                        size: 30.0,
-                        color: Colors.black54,
+                        size: kDimensionValue_30,
+                        color: kStyleColorBlack_54,
                       ),
                     )
                   ],
@@ -87,11 +88,12 @@ class _TaskScreenState extends State<TaskScreen> {
             Expanded(
               //flex: 8,
               child: Container(
-                color: Colors.white,
+                color: kStyleColorWhite,
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kDimensionValue_15),
                       child: Row(
                         children: [
                           SizedBox(
@@ -100,8 +102,8 @@ class _TaskScreenState extends State<TaskScreen> {
                               image: AssetImage(widget.listIcon),
                             ),
                           ),
-                          SizedBox(
-                            width: 15,
+                          const SizedBox(
+                            width: kDimensionValue_15,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,15 +111,15 @@ class _TaskScreenState extends State<TaskScreen> {
                               Text(
                                 '${Provider.of<TaskData>(context).taskCount} Tasks',
                                 style: const TextStyle(
-                                  color: Colors.black26,
-                                  fontSize: 20.0,
+                                  color: kStyleColorBlack_26,
+                                  fontSize: kStyleFontSizeValue_20,
                                 ),
                               ),
                               Text(
                                 widget.listName,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 35.0,
+                                  fontSize: kStyleFontSizeValue_35,
                                 ),
                               )
                             ],
@@ -126,7 +128,7 @@ class _TaskScreenState extends State<TaskScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 8.0,
+                      height: kDimensionValue_8,
                     ),
                     Expanded(
                       child: Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do_list_app_flutter/constants.dart';
 import 'package:to_do_list_app_flutter/screens/task_collection_screen.dart';
+import 'package:to_do_list_app_flutter/values.dart';
 
 class CreateNewUserPage extends StatefulWidget {
   static String id = 'CreateNewUserPage';
@@ -19,7 +20,7 @@ class _CreateNewUserPageState extends State<CreateNewUserPage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: kDimensionPaddingEdgeInsetsAll_10,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,12 +28,12 @@ class _CreateNewUserPageState extends State<CreateNewUserPage> {
               TextField(
                 controller: controller,
                 textAlign: TextAlign.center,
-                decoration: kDecoration.copyWith(hintText: 'Enter your Name'),
+                decoration: kDecoration.copyWith(hintText: kHintText),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Male'),
+                  const Text(kRadioButtonOptionMale),
                   Radio(
                     activeColor: kPrimaryButtonColor,
                     value: 1,
@@ -41,11 +42,10 @@ class _CreateNewUserPageState extends State<CreateNewUserPage> {
                       setState(() {
                         _value = value;
                         isMale = true;
-                        print(_value);
                       });
                     },
                   ),
-                  const Text('Female'),
+                  const Text(kRadioButtonOptionFemale),
                   Radio(
                     activeColor: kPrimaryButtonColor,
                     value: 2,
@@ -54,42 +54,38 @@ class _CreateNewUserPageState extends State<CreateNewUserPage> {
                       setState(() {
                         _value = value;
                         isMale = false;
-                        print(_value);
                       });
                     },
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: kDimensionValue_10,
               ),
               TextButton(
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(kPrimaryButtonColor),
                   padding: MaterialStateProperty.all(
-                    EdgeInsets.all(15.0),
+                    const EdgeInsets.all(kDimensionValue_15),
                   ),
                 ),
                 onPressed: () async {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
 
-                  prefs.setString('UserName', controller.text);
-                  prefs.setBool('Gender', isMale ?? true);
+                  prefs.setString(kUserNameKey, controller.text);
+                  prefs.setBool(kGenderKey, isMale ?? true);
 
-                  prefs.setBool('isUserNew', false);
-
-                  print(controller.text);
-
-                  print(prefs.getString('UserName'));
-                  print(prefs.getBool('Gender'));
+                  prefs.setBool(newUserKey, false);
 
                   Navigator.pushNamed(context, TaskCollectionScreen.id);
                 },
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                child: const Text(
+                  kCreateNewUserScreenButtonText,
+                  style: TextStyle(
+                      color: kStyleColorWhite,
+                      fontSize: kStyleFontSizeValue_15),
                 ),
               ),
             ],

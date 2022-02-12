@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_list_app_flutter/constants.dart';
 
 class TaskTile extends StatelessWidget {
   final bool isChecked;
@@ -20,11 +21,11 @@ class TaskTile extends StatelessWidget {
         taskTitle,
         style: TextStyle(
             decoration: isChecked ? TextDecoration.lineThrough : null,
-            color: isChecked ? Colors.black26 : Colors.black,
+            color: isChecked ? kStyleColorBlack_26 : kStyleColorBlack,
             fontWeight: FontWeight.w300),
       ),
       leading: Checkbox(
-        activeColor: Colors.black26,
+        activeColor: kStyleColorBlack_26,
         value: isChecked,
         onChanged: checkboxCallback,
       ),

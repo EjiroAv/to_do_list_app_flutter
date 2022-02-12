@@ -4,7 +4,8 @@ import 'models/task.dart';
 final List<Task> today = [
   Task(name: 'Finish coding project'),
   Task(name: 'Call Mum'),
-  Task(name: 'Apply for Internships')
+  Task(name: 'Apply for Internships'),
+  Task(name: 'This are dummy list, Delete and then write yours')
 ];
 
 final List<Task> planned = [

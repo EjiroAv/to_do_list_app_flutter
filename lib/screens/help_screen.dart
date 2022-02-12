@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_list_app_flutter/widgets/help_widget.dart';
+import 'package:to_do_list_app_flutter/values.dart';
 
 class HelpScreen extends StatelessWidget {
   static const String id = 'HelpScreen';
@@ -15,39 +16,33 @@ class HelpScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               HelpWidget(
-                title: 'Add Task',
-                content:
-                    'To Add Task Click the + Button in the Task Screen, Input your new Task, and Click the Add Button',
+                title: kHelpScreenValueAddTaskTitle,
+                content: kHelpScreenValueAddTaskContent,
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              HelpWidget(
-                  title: 'Delete Task',
-                  content: 'Long Press/Hold down on the task to delete'),
-              SizedBox(
-                height: 10.0,
+              const SizedBox(
+                height: kDimensionValue_10,
               ),
               HelpWidget(
-                  title: 'Clear Tasks',
-                  content:
-                      'To clear all the task in a certain collection ,Hold the Task in the Collections Screen and select yes'),
-              SizedBox(
-                height: 10.0,
+                  title: kHelpScreenValueDeleteTaskTitle,
+                  content: kHelpScreenValueDeleteTaskContent),
+              const SizedBox(
+                height: kDimensionValue_10,
               ),
               HelpWidget(
-                  title: 'UpdateTask',
-                  content:
-                      'To clear all the task in a certain collection Hold the Task in the Collections Screen and select yes'),
-              SizedBox(
-                height: 50.0,
+                  title: kHelpScreenValueUpdateTaskTitle,
+                  content: kHelpScreenValueUpdateTaskContent),
+              const SizedBox(
+                height: kDimensionValue_10,
               ),
               HelpWidget(
-                  title: 'Reset App',
-                  content: 'To Reset The App clear data from Settings'),
-              Align(
+                  title: kHelpScreenValueResetAppTitle,
+                  content: kHelpScreenValueResetAppContent),
+              const SizedBox(
+                height: kDimensionValue_50,
+              ),
+              const Align(
                 alignment: Alignment.bottomCenter,
-                child: Text('Built by Ejiro Avwerhota : Github @EjiroAvw'),
+                child: Text(kAppDeveloperCredit),
               ),
             ],
           ),

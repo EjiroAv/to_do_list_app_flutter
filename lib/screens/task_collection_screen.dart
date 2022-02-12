@@ -6,6 +6,7 @@ import 'package:to_do_list_app_flutter/models/task_data.dart';
 import 'package:to_do_list_app_flutter/screens/tasks_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_list_app_flutter/screens/update_user_screen.dart';
+import 'package:to_do_list_app_flutter/values.dart';
 
 class TaskCollectionScreen extends StatefulWidget {
   //TODO: Work on the User Interface of this Page Next
@@ -22,7 +23,7 @@ class _TaskCollectionScreenState extends State<TaskCollectionScreen> {
 
   String getUserProfileImage(bool userGender) {
     String userProfileImage =
-        userGender ? 'images/male_profile.png' : 'images/female_profile.png';
+        userGender ? kImageValueProfileMale : kImageValueProfileFemale;
     return userProfileImage;
   }
 
@@ -33,8 +34,8 @@ class _TaskCollectionScreenState extends State<TaskCollectionScreen> {
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       _sharedPreference = sp;
 
-      savedUserName = _sharedPreference.getString('UserName').toString();
-      isUserMale = _sharedPreference.getBool('Gender');
+      savedUserName = _sharedPreference.getString(kUserNameKey).toString();
+      isUserMale = _sharedPreference.getBool(kGenderKey);
 
       savedUserName ??= 'null';
 
@@ -48,16 +49,16 @@ class _TaskCollectionScreenState extends State<TaskCollectionScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding: kDimensionPaddingEdgeInsetsAll_30,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Icon(
                 Icons.sort,
-                size: 30.0,
+                size: kDimensionValue_30,
               ),
               const SizedBox(
-                height: 20.0,
+                height: kDimensionValue_20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,23 +68,30 @@ class _TaskCollectionScreenState extends State<TaskCollectionScreen> {
                     children: [
                       Text(
                         'Hello $savedUserName',
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: kStyleFontSizeValue_20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         'Today you have ${Provider.of<TaskData>(context).getTodayTaskCount()} tasks',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, UpdateUserScreen.id);
+                      Navigator.pushNamed(
+                        context,
+                        UpdateUserScreen.id,
+                      );
                     },
                     child: CircleAvatar(
                       backgroundColor: kPrimaryColorYellow,
                       child: SizedBox(
-                        height: 100.0,
+                        height: kDimensionValue_100,
                         child: Image(
                           image: AssetImage(
                             getUserProfileImage(isUserMale ?? true),
@@ -95,113 +103,111 @@ class _TaskCollectionScreenState extends State<TaskCollectionScreen> {
                 ],
               ),
               const SizedBox(
-                height: 50.0,
+                height: kDimensionValue_50,
               ),
               Expanded(
-                child: Container(
-                  child: ListView(
-                    children: [
-                      CollectionBubble(
-                        icon: 'images/today_icon.png',
-                        category: 'Today',
-                        numberOfTask:
-                            Provider.of<TaskData>(context).getTodayTaskCount(),
-                        onTap: () {
-                          Provider.of<TaskData>(context, listen: false)
-                              .selectListCategory(1);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TaskScreen(
-                                listIcon: 'images/today_icon.png',
-                                listName: 'Today',
-                              ),
+                child: ListView(
+                  children: [
+                    CollectionBubble(
+                      icon: kImageValueTodayIcon,
+                      category: kTodayCategoryId,
+                      numberOfTask:
+                          Provider.of<TaskData>(context).getTodayTaskCount(),
+                      onTap: () {
+                        Provider.of<TaskData>(context, listen: false)
+                            .selectListCategory(1);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TaskScreen(
+                              listIcon: kImageValueTodayIcon,
+                              listName: kTodayCategoryId,
                             ),
-                          );
-                        },
-                      ),
-                      CollectionBubble(
-                        icon: 'images/planner.png',
-                        category: 'Planned',
-                        numberOfTask: Provider.of<TaskData>(context)
-                            .getPlannedTaskCount(),
-                        onTap: () {
-                          Provider.of<TaskData>(context, listen: false)
-                              .selectListCategory(2);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TaskScreen(
-                                listIcon: 'images/planner.png',
-                                listName: 'Planned',
-                              ),
+                          ),
+                        );
+                      },
+                    ),
+                    CollectionBubble(
+                      icon: kImageValuePersonalIcon,
+                      category: kPlannedCategoryId,
+                      numberOfTask:
+                          Provider.of<TaskData>(context).getPlannedTaskCount(),
+                      onTap: () {
+                        Provider.of<TaskData>(context, listen: false)
+                            .selectListCategory(2);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TaskScreen(
+                              listIcon: kImageValuePersonalIcon,
+                              listName: kPlannedCategoryId,
                             ),
-                          );
-                        },
-                      ),
-                      CollectionBubble(
-                        icon: isUserMale ?? true
-                            ? 'images/personal_male.png'
-                            : 'images/personal_female.png',
-                        category: 'Personal',
-                        numberOfTask: Provider.of<TaskData>(context)
-                            .getPersonalTaskCount(),
-                        onTap: () {
-                          Provider.of<TaskData>(context, listen: false)
-                              .selectListCategory(3);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TaskScreen(
-                                listIcon: isUserMale ?? true
-                                    ? 'images/personal_male.png'
-                                    : 'images/personal_female.png',
-                                listName: 'Personal',
-                              ),
+                          ),
+                        );
+                      },
+                    ),
+                    CollectionBubble(
+                      icon: isUserMale ?? true
+                          ? kImageValuePersonalMaleIcon
+                          : kImageValuePersonalFemaleIcon,
+                      category: kPersonalCategoryId,
+                      numberOfTask:
+                          Provider.of<TaskData>(context).getPersonalTaskCount(),
+                      onTap: () {
+                        Provider.of<TaskData>(context, listen: false)
+                            .selectListCategory(3);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TaskScreen(
+                              listIcon: isUserMale ?? true
+                                  ? kImageValuePersonalMaleIcon
+                                  : kImageValuePersonalFemaleIcon,
+                              listName: kPersonalCategoryId,
                             ),
-                          );
-                        },
-                      ),
-                      CollectionBubble(
-                        icon: 'images/work_icon.png',
-                        category: 'Work',
-                        numberOfTask:
-                            Provider.of<TaskData>(context).getWorkTaskCount(),
-                        onTap: () {
-                          Provider.of<TaskData>(context, listen: false)
-                              .selectListCategory(4);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TaskScreen(
-                                listIcon: 'images/work_icon.png',
-                                listName: 'Work',
-                              ),
+                          ),
+                        );
+                      },
+                    ),
+                    CollectionBubble(
+                      icon: kImageValueWorkIcon,
+                      category: kWorkCategoryId,
+                      numberOfTask:
+                          Provider.of<TaskData>(context).getWorkTaskCount(),
+                      onTap: () {
+                        Provider.of<TaskData>(context, listen: false)
+                            .selectListCategory(4);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TaskScreen(
+                              listIcon: kImageValueWorkIcon,
+                              listName: kWorkCategoryId,
                             ),
-                          );
-                        },
-                      ),
-                      CollectionBubble(
-                        icon: 'images/shopping_icon.png',
-                        category: 'Shopping',
-                        numberOfTask: Provider.of<TaskData>(context)
-                            .getShoppingTaskCount(),
-                        onTap: () {
-                          Provider.of<TaskData>(context, listen: false)
-                              .selectListCategory(5);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TaskScreen(
-                                listIcon: 'images/shopping_icon.png',
-                                listName: 'Shopping',
-                              ),
+                          ),
+                        );
+                      },
+                    ),
+                    CollectionBubble(
+                      icon: kImageValueShoppingIcon,
+                      category: kShoppingCategoryId,
+                      numberOfTask:
+                          Provider.of<TaskData>(context).getShoppingTaskCount(),
+                      onTap: () {
+                        Provider.of<TaskData>(context, listen: false)
+                            .selectListCategory(5);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TaskScreen(
+                              listIcon: kImageValueShoppingIcon,
+                              listName: kShoppingCategoryId,
                             ),
-                          );
-                        },
-                      )
-                    ],
-                  ),
+                          ),
+                        );
+                      },
+                    )
+                  ],
                 ),
               )
             ],
@@ -229,51 +235,52 @@ class CollectionBubble extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        margin: EdgeInsets.all(10.0),
+        margin: kDimensionValueMarginEdgeInsetsAll_10,
         child: Material(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
-            ),
-            elevation: 10,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 50,
-                        child: Image(
-                          image: AssetImage(icon),
-                        ),
+          color: Colors.white,
+          borderRadius: const BorderRadius.all(
+            kDimensionRadiusCircular_10,
+          ),
+          elevation: 10,
+          child: Padding(
+            padding: kDimensionPaddingEdgeInsetAll_20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      height: kDimensionValue_50,
+                      child: Image(
+                        image: AssetImage(icon),
                       ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '$category',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w900,
-                            ),
+                    ),
+                    const SizedBox(
+                      width: kDimensionValue_8,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          category,
+                          style: const TextStyle(
+                            fontSize: kStyleFontSizeValue_18,
+                            fontWeight: FontWeight.w900,
                           ),
-                          Text(
-                            '$numberOfTask Tasks',
-                            style: TextStyle(color: Colors.black26),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Icon(Icons.more_vert),
-                ],
-              ),
-            )),
+                        ),
+                        Text(
+                          '$numberOfTask Tasks',
+                          style: const TextStyle(color: kStyleColorBlack_26),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                const Icon(Icons.more_vert),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

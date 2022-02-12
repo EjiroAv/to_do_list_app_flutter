@@ -3,83 +3,91 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do_list_app_flutter/screens/create_new_user_page.dart';
 import 'package:to_do_list_app_flutter/screens/task_collection_screen.dart';
 import 'package:to_do_list_app_flutter/constants.dart';
+import 'package:to_do_list_app_flutter/values.dart';
 
-class NewUserScreen extends StatefulWidget {
-  static const String id = 'NewUserScreen';
+class StartScreen extends StatefulWidget {
+  static const String id = 'StartScreen';
 
   @override
-  State<NewUserScreen> createState() => _NewUserScreenState();
+  State<StartScreen> createState() => _StartScreenState();
 }
 
-class _NewUserScreenState extends State<NewUserScreen> {
+class _StartScreenState extends State<StartScreen> {
   late SharedPreferences _sharedPreferences;
   bool? isUserNew;
 
   @override
   void initState() {
-    // TODO: implement initState
+    //TODO: implement initState
     super.initState();
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       _sharedPreferences = sp;
 
       isUserNew = _sharedPreferences.getBool('isUserNew') ?? true;
-
-      if (isUserNew == false) {
-        Navigator.pushReplacementNamed(context, TaskCollectionScreen.id);
-      }
     });
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kStyleColorWhite,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: kDimensionPaddingEdgeInsetAll_20,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(
-                image: AssetImage('images/new_user_background_image.png'),
+              const Image(
+                image: kStartScreenBackgroundImage,
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: kDimensionValue_10,
               ),
-              Text(
-                'Organise Your Task',
+              const Text(
+                kStartScreenValueTitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 28,
+                  fontSize: kStyleFontSizeValue_28,
                 ),
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: kDimensionValue_10,
               ),
-              Text(
-                'Tudy is a simple and effective to-do List and task Manager app which helps track and manage your important task',
+              const Text(
+                kStartScreenValueSubTitle,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black26, fontSize: 18),
+                style: TextStyle(
+                  color: kStyleColorBlack_26,
+                  fontSize: kStyleFontSizeValue_18,
+                ),
               ),
-              SizedBox(
-                height: 25,
+              const SizedBox(
+                height: kDimensionValue_25,
               ),
               TextButton(
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(kPrimaryButtonColor),
                   padding: MaterialStateProperty.all(
-                    EdgeInsets.all(20.0),
+                    kDimensionPaddingEdgeInsetAll_20,
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, CreateNewUserPage.id);
+                  final shouldCreateNewUser = isUserNew ?? true;
+                  shouldCreateNewUser
+                      ? Navigator.pushNamed(context, CreateNewUserPage.id)
+                      : Navigator.pushNamed(context, TaskCollectionScreen.id);
                 },
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                child: const Text(
+                  kStartScreenButtonText,
+                  style: TextStyle(
+                    color: kStyleColorWhite,
+                    fontSize: kStyleFontSizeValue_15,
+                  ),
                 ),
               ),
             ],

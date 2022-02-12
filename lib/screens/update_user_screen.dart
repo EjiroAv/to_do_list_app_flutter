@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do_list_app_flutter/constants.dart';
 import 'package:to_do_list_app_flutter/screens/task_collection_screen.dart';
+import 'package:to_do_list_app_flutter/values.dart';
 
 class UpdateUserScreen extends StatefulWidget {
   static String id = 'UpdateUserScreen';
@@ -25,8 +26,8 @@ class _UpdateUserScreen extends State<UpdateUserScreen> {
 
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       _sharedPreferences = sp;
-      savedUserName = _sharedPreferences.getString('UserName');
-      isMale = _sharedPreferences.getBool('Gender');
+      savedUserName = _sharedPreferences.getString(kUserNameKey);
+      isMale = _sharedPreferences.getBool(kGenderKey);
 
       if (isMale == false) {
         _value = 2;
@@ -41,7 +42,7 @@ class _UpdateUserScreen extends State<UpdateUserScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: kDimensionPaddingEdgeInsetsAll_10,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -49,7 +50,7 @@ class _UpdateUserScreen extends State<UpdateUserScreen> {
               TextField(
                 controller: TextEditingController(text: savedUserName),
                 textAlign: TextAlign.center,
-                decoration: kDecoration.copyWith(hintText: 'Enter your Name'),
+                decoration: kDecoration.copyWith(hintText: kHintText),
                 onChanged: (value) {
                   savedUserName = value;
                 },
@@ -57,7 +58,7 @@ class _UpdateUserScreen extends State<UpdateUserScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Male'),
+                  const Text(kRadioButtonOptionMale),
                   Radio(
                     activeColor: kPrimaryButtonColor,
                     value: 1,
@@ -70,7 +71,7 @@ class _UpdateUserScreen extends State<UpdateUserScreen> {
                       });
                     },
                   ),
-                  const Text('Female'),
+                  const Text(kRadioButtonOptionFemale),
                   Radio(
                     activeColor: kPrimaryButtonColor,
                     value: 2,
@@ -85,34 +86,32 @@ class _UpdateUserScreen extends State<UpdateUserScreen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: kDimensionValue_10,
               ),
               TextButton(
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all(kPrimaryButtonColor),
                   padding: MaterialStateProperty.all(
-                    EdgeInsets.all(15.0),
+                    kDimensionPaddingEdgeInsetsAll_15,
                   ),
                 ),
                 onPressed: () async {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
 
-                  prefs.setString('UserName', savedUserName.toString());
-                  prefs.setBool('Gender', isMale ?? true);
-
-                  print(controller.text);
-
-                  print(prefs.getString('UserName'));
-                  print(prefs.getBool('Gender'));
+                  prefs.setString(kUserNameKey, savedUserName.toString());
+                  prefs.setBool(kGenderKey, isMale ?? true);
 
                   Navigator.pushNamed(context, TaskCollectionScreen.id);
                 },
-                child: Text(
-                  'Update User ',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                child: const Text(
+                  kUpdateUserScreenButtonText,
+                  style: TextStyle(
+                    color: kStyleColorWhite,
+                    fontSize: kStyleFontSizeValue_15,
+                  ),
                 ),
               ),
             ],

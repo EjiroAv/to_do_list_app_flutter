@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_list_app_flutter/constants.dart';
 import 'package:to_do_list_app_flutter/models/task.dart';
 import 'dart:collection';
 import 'package:to_do_list_app_flutter/lists.dart';
@@ -21,19 +22,19 @@ class TaskData extends ChangeNotifier {
 
   void selectListCategory(int selectedCategory) async {
     if (selectedCategory == 1) {
-      listName = 'today';
+      listName = kTodayCategoryId;
       LoadData(listName: listName, alternativeList: today);
     } else if (selectedCategory == 2) {
-      listName = 'planned';
+      listName = kPlannedCategoryId;
       LoadData(listName: listName, alternativeList: planned);
     } else if (selectedCategory == 3) {
-      listName = 'personal';
+      listName = kPersonalCategoryId;
       LoadData(listName: listName, alternativeList: personal);
     } else if (selectedCategory == 4) {
-      listName = 'work';
+      listName = kWorkCategoryId;
       LoadData(listName: listName, alternativeList: work);
     } else if (selectedCategory == 5) {
-      listName = 'shopping';
+      listName = kShoppingCategoryId;
       LoadData(listName: listName, alternativeList: shopping);
     }
     notifyListeners();
@@ -136,7 +137,7 @@ class TaskData extends ChangeNotifier {
   }
 
   int getTodayTaskCount() {
-    loadTodayCount(listName: 'today', alternativeList: today);
+    loadTodayCount(listName: kTodayCategoryId, alternativeList: today);
     if (_tempTodayData == null) {
       return today.length;
     } else {
@@ -145,7 +146,7 @@ class TaskData extends ChangeNotifier {
   }
 
   int getPlannedTaskCount() {
-    loadPlannedCount(listName: 'planned', alternativeList: today);
+    loadPlannedCount(listName: kPlannedCategoryId, alternativeList: planned);
     if (_tempPlannedData == null) {
       return planned.length;
     } else {
@@ -154,7 +155,7 @@ class TaskData extends ChangeNotifier {
   }
 
   int getPersonalTaskCount() {
-    loadPersonalCount(listName: 'personal', alternativeList: today);
+    loadPersonalCount(listName: kPersonalCategoryId, alternativeList: personal);
     if (_tempPersonalData == null) {
       return personal.length;
     } else {
@@ -163,7 +164,7 @@ class TaskData extends ChangeNotifier {
   }
 
   int getWorkTaskCount() {
-    loadWorkCount(listName: 'work', alternativeList: today);
+    loadWorkCount(listName: kWorkCategoryId, alternativeList: work);
     if (_tempWorkData == null) {
       return work.length;
     } else {
@@ -172,7 +173,7 @@ class TaskData extends ChangeNotifier {
   }
 
   int getShoppingTaskCount() {
-    loadShoppingCount(listName: 'shopping', alternativeList: today);
+    loadShoppingCount(listName: kShoppingCategoryId, alternativeList: shopping);
     if (_tempShoppingData == null) {
       return shopping.length;
     } else {
@@ -205,10 +206,5 @@ class TaskData extends ChangeNotifier {
     String listJson = jsonEncode(list);
     print('Generated Json $listJson');
     prefs.setString(listName, listJson);
-  }
-
-  _clearList(listName) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove(listName);
   }
 }

@@ -3,9 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:to_do_list_app_flutter/models/task_data.dart';
 import 'package:to_do_list_app_flutter/screens/create_new_user_page.dart';
 import 'package:to_do_list_app_flutter/screens/help_screen.dart';
-import 'package:to_do_list_app_flutter/screens/new_user_screen.dart';
+import 'package:to_do_list_app_flutter/screens/start_screen.dart';
 import 'package:to_do_list_app_flutter/screens/task_collection_screen.dart';
 import 'package:to_do_list_app_flutter/screens/update_user_screen.dart';
+import 'constants.dart';
 
 void main() {
   runApp(TodoListApp());
@@ -19,11 +20,11 @@ class TodoListApp extends StatelessWidget {
         return TaskData();
       },
       child: MaterialApp(
-        theme: ThemeData(fontFamily: 'Poppins'),
-        initialRoute: NewUserScreen.id,
+        theme: kCustomThemeData,
+        initialRoute: StartScreen.id,
         routes: {
+          StartScreen.id: (context) => StartScreen(),
           TaskCollectionScreen.id: (context) => TaskCollectionScreen(),
-          NewUserScreen.id: (context) => NewUserScreen(),
           CreateNewUserPage.id: (context) => CreateNewUserPage(),
           UpdateUserScreen.id: (context) => UpdateUserScreen(),
           HelpScreen.id: (context) => HelpScreen(),
