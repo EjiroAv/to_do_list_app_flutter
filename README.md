@@ -9,4 +9,5 @@ A simple To-do List App Built with Flutter
 ![TaskScreen2](/docs/TaskScreen2.png)
 
 Illustrations & Icons from [Icons8](https://icons8.com/). <br/>
-Design Inspiration [Dribble : Tudy by Ender Ercedoğan](https://dribbble.com/shots/5796198-Tudy)
+Design Inspiration [Dribble : Tudy by Ender Ercedoğan](https://dribbble.com/shots/5796198-Tudy) <br/>
+App Built By [Ejiro Avwerhota](https://www.linkedin.com/in/ejiro-oghene-avwerhota-5369a013b/)
