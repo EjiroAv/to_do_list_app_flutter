@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do_list_app_flutter/constants.dart';
-import 'package:to_do_list_app_flutter/screens/task_collection_screen.dart';
+import 'package:to_do_list_app_flutter/screens/dashboard_screen.dart';
 import 'package:to_do_list_app_flutter/values.dart';
 
 class CreateNewUserPage extends StatefulWidget {
@@ -79,7 +79,7 @@ class _CreateNewUserPageState extends State<CreateNewUserPage> {
 
                   prefs.setBool(newUserKey, false);
 
-                  Navigator.pushNamed(context, TaskCollectionScreen.id);
+                  Navigator.pushNamed(context, DashboardScreen.id);
                 },
                 child: const Text(
                   kCreateNewUserScreenButtonText,

@@ -1,16 +1,12 @@
-# to_do_list_app_flutter
-
 A simple To-do List App Built with Flutter
 
-## Getting Started
+/docs/images/StartScreen.png
+/docs/images/NewUser.png
+/docs/images/DashBoard.png
+/docs/images/UpdateDashBoard.png
+/docs/images/UpdatedScreen.png
+/docs/images/TaskScreen.png
+/docs/images/TaskScreen2.png
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Illustrations & Icons from [Icons8](https://icons8.com/).
+Design Inspiration [Dribble : Tudy by Ender Ercedoğan](https://dribbble.com/shots/5796198-Tudy)

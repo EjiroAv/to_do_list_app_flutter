@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do_list_app_flutter/screens/create_new_user_page.dart';
-import 'package:to_do_list_app_flutter/screens/task_collection_screen.dart';
+import 'package:to_do_list_app_flutter/screens/dashboard_screen.dart';
 import 'package:to_do_list_app_flutter/constants.dart';
 import 'package:to_do_list_app_flutter/values.dart';
 
@@ -80,7 +80,7 @@ class _StartScreenState extends State<StartScreen> {
                   final shouldCreateNewUser = isUserNew ?? true;
                   shouldCreateNewUser
                       ? Navigator.pushNamed(context, CreateNewUserPage.id)
-                      : Navigator.pushNamed(context, TaskCollectionScreen.id);
+                      : Navigator.pushNamed(context, DashboardScreen.id);
                 },
                 child: const Text(
                   kStartScreenButtonText,

@@ -8,15 +8,15 @@ import 'package:provider/provider.dart';
 import 'package:to_do_list_app_flutter/screens/update_user_screen.dart';
 import 'package:to_do_list_app_flutter/values.dart';
 
-class TaskCollectionScreen extends StatefulWidget {
+class DashboardScreen extends StatefulWidget {
   //TODO: Work on the User Interface of this Page Next
   static const String id = 'TaskCollectionScreen';
 
   @override
-  State<TaskCollectionScreen> createState() => _TaskCollectionScreenState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _TaskCollectionScreenState extends State<TaskCollectionScreen> {
+class _DashboardScreenState extends State<DashboardScreen> {
   String? savedUserName;
   bool? isUserMale;
   late SharedPreferences _sharedPreference;
