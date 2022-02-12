@@ -3,8 +3,8 @@ A simple To-do List App Built with Flutter
 ![Start Screen](/docs/StartScreen.png )
 ![New User](/docs/NewUser.png)
 ![DashBoard](/docs/DashBoard.png)
-![Update](/docs/UpdatedDashBoard.png)
 ![Update Screen](/docs/UpdatedScreen.png)
+![Update](/docs/UpdatedDashBoard.png)
 ![TaskScreen](/docs/TaskScreen.png)
 ![TaskScreen2](/docs/TaskScreen2.png)
 
