@@ -1,6 +1,6 @@
 A simple To-do List App Built with Flutter
 
-<img src="/docs/StartScreen.png" width="250" height="250">
+![Start Screen](/docs/StartScreen.png )
 ![New User](/docs/NewUser.png)
 ![DashBoard](/docs/DashBoard.png)
 ![Update](/docs/UpdateDashBoard.png)
